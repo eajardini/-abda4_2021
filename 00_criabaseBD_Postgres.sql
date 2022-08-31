@@ -1153,3 +1153,31 @@ insert into Instrutor
   values (5, 'Marcos', '711-9966', '17/09/2020');
 
 -- Fim 
+
+
+
+create table obra (
+        id_obra serial,
+        codigo varchar(5) unique,
+        descricao varchar(20),
+        constraint pk_obra primary key (id_obra));
+
+
+create table maquina (
+        id_maquina serial,
+        codigo varchar(5) unique,
+        marca varchar(20),
+        constraint pk_maquina primary key (id_maquina));
+
+ 
+create table usa (
+        id_usa serial,
+        id_obra int,
+        id_maquina int, 
+        constraint pk_usa primary key (id_usa),
+        constraint fk_usa_maquina foreign key (id_maquina)
+                references maquina,
+        constraint fk_usa_obra foreign key (id_obra)
+                references obra,
+        constraint un_usa unique (id_obra, id_maquina)
+        );
